@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duolingo for Kids - Current Learning Activity</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f7f7f7;
+            color: #333;
+        }
+
+        .phone-mockup {
+            width: 375px;
+            height: 812px;
+            background: #fff;
+            margin: 20px auto;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .status-bar {
+            height: 44px;
+            background: #000;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 14px;
+        }
+
+        .header {
+            background: #58CC02;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .lesson-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(255,255,255,0.3);
+            margin-top: 10px;
+        }
+
+        .progress-fill {
+            width: 80%;
+            height: 100%;
+            background: white;
+        }
+
+        .main-content {
+            padding: 40px 20px;
+            text-align: center;
+            background: #fff;
+            height: calc(100% - 120px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .question {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .visual-question {
+            font-size: 80px;
+            margin-bottom: 40px;
+        }
+
+        .answer-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .answer-btn {
+            background: #f0f0f0;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .answer-btn:hover {
+            background: #e0e0e0;
+            transform: translateY(-2px);
+        }
+
+        .submit-btn {
+            background: #58CC02;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: #4CAF50;
+            transform: translateY(-2px);
+        }
+
+        .problem-annotation {
+            position: absolute;
+            background: #ff4444;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 10;
+        }
+
+        .problem-1 {
+            top: 200px;
+            right: 20px;
+        }
+
+        .problem-2 {
+            top: 400px;
+            right: 20px;
+        }
+
+        .problem-3 {
+            top: 600px;
+            right: 20px;
+        }
+
+        .annotation-line {
+            position: absolute;
+            width: 2px;
+            background: #ff4444;
+            z-index: 5;
+        }
+
+        .line-1 {
+            top: 200px;
+            right: 80px;
+            height: 100px;
+        }
+
+        .line-2 {
+            top: 400px;
+            right: 80px;
+            height: 100px;
+        }
+
+        .line-3 {
+            top: 600px;
+            right: 80px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-mockup">
+        <div class="status-bar">
+            <span>9:41</span>
+            <span>📶 📶 📶 🔋</span>
+        </div>
+        
+        <div class="header">
+            <button class="back-btn">←</button>
+            <div class="lesson-title">🎯 Learn Colors in Spanish</div>
+            <div></div>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+
+        <div class="main-content">
+            <div class="question">What color is this?</div>
+            <div class="visual-question">🍎</div>
+            
+            <div class="answer-options">
+                <button class="answer-btn">Red</button>
+                <button class="answer-btn">Blue</button>
+                <button class="answer-btn">Green</button>
+                <button class="answer-btn">Yellow</button>
+            </div>
+            
+            <button class="submit-btn">Submit Answer</button>
+        </div>
+
+        <!-- Problem Annotations -->
+        <div class="problem-annotation problem-1">❌ No difficulty indicator<br>Child doesn't know level</div>
+        <div class="annotation-line line-1"></div>
+        
+        <div class="problem-annotation problem-2">❌ No help available<br>Frustration when stuck</div>
+        <div class="annotation-line line-2"></div>
+        
+        <div class="problem-annotation problem-3">❌ No encouragement<br>Feels like test</div>
+        <div class="annotation-line line-3"></div>
+    </div>
+</body>
+</html>

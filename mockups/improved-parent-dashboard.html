@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duolingo for Kids - Improved Parent Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f7f7f7;
+            color: #333;
+        }
+
+        .phone-mockup {
+            width: 375px;
+            height: 812px;
+            background: #fff;
+            margin: 20px auto;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .status-bar {
+            height: 44px;
+            background: #000;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 14px;
+        }
+
+        .header {
+            background: #58CC02;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .dashboard-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .child-name {
+            font-size: 16px;
+            margin-top: 5px;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            padding: 20px;
+            background: #fff;
+        }
+
+        .achievement-notification {
+            background: linear-gradient(135deg, #58CC02, #4CAF50);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .achievement-notification::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: translateX(-100%) translateY(-100%); }
+            50% { transform: translateX(100%) translateY(100%); }
+        }
+
+        .achievement-text {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .achievement-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .achievement-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .achievement-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .highlight-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .highlight-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #58CC02;
+            margin-bottom: 5px;
+        }
+
+        .highlight-label {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .insight-card {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border-left: 4px solid #1CB0F6;
+        }
+
+        .insight-text {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .progress-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .progress-item {
+            margin-bottom: 15px;
+        }
+
+        .progress-label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #58CC02;
+            border-radius: 4px;
+        }
+
+        .progress-75 { width: 75%; }
+        .progress-50 { width: 50%; }
+        .progress-30 { width: 30%; }
+
+        .progress-percentage {
+            font-size: 12px;
+            color: #666;
+            text-align: right;
+            margin-top: 5px;
+        }
+
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .action-btn {
+            background: #1CB0F6;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            background: #0ea5e9;
+            transform: translateY(-2px);
+        }
+
+        .secondary-btn {
+            background: #f0f0f0;
+            color: #666;
+        }
+
+        .secondary-btn:hover {
+            background: #e0e0e0;
+        }
+
+        .improvement-annotation {
+            position: absolute;
+            background: #4CAF50;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 10;
+        }
+
+        .improvement-1 {
+            top: 200px;
+            right: 20px;
+        }
+
+        .improvement-2 {
+            top: 400px;
+            right: 20px;
+        }
+
+        .improvement-3 {
+            top: 600px;
+            right: 20px;
+        }
+
+        .annotation-line {
+            position: absolute;
+            width: 2px;
+            background: #4CAF50;
+            z-index: 5;
+        }
+
+        .line-1 {
+            top: 200px;
+            right: 120px;
+            height: 100px;
+        }
+
+        .line-2 {
+            top: 400px;
+            right: 120px;
+            height: 100px;
+        }
+
+        .line-3 {
+            top: 600px;
+            right: 120px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-mockup">
+        <div class="status-bar">
+            <span>9:41</span>
+            <span>📶 📶 📶 🔋</span>
+        </div>
+        
+        <div class="header">
+            <div class="dashboard-title">Parent Dashboard</div>
+            <div class="child-name">Emma's Learning Journey</div>
+        </div>
+
+        <div class="main-content">
+            <div class="achievement-notification">
+                <div class="achievement-text">🎉 Emma just learned 5 new colors!</div>
+                <div class="achievement-actions">
+                    <button class="achievement-btn">Send Encouragement</button>
+                    <button class="achievement-btn">View Lesson</button>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Today's Highlights:</div>
+                <div class="highlights-grid">
+                    <div class="highlight-card">
+                        <div class="highlight-number">3</div>
+                        <div class="highlight-label">Lessons Completed</div>
+                    </div>
+                    <div class="highlight-card">
+                        <div class="highlight-number">15</div>
+                        <div class="highlight-label">Minutes Learning</div>
+                    </div>
+                    <div class="highlight-card">
+                        <div class="highlight-number">12</div>
+                        <div class="highlight-label">New Words</div>
+                    </div>
+                    <div class="highlight-card">
+                        <div class="highlight-number">3</div>
+                        <div class="highlight-label">Day Streak</div>
+                    </div>
+                </div>
+                
+                <div class="insight-card">
+                    <div class="insight-text">💡 Emma asked for help 2 times today - this is normal for her age group!</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Learning Progress:</div>
+                <div class="progress-section">
+                    <div class="progress-item">
+                        <div class="progress-label">Spanish Colors</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill progress-75"></div>
+                        </div>
+                        <div class="progress-percentage">75%</div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-label">Spanish Animals</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill progress-50"></div>
+                        </div>
+                        <div class="progress-percentage">50%</div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-label">Spanish Food</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill progress-30"></div>
+                        </div>
+                        <div class="progress-percentage">30%</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="action-btn">Send Message to Emma</button>
+                <button class="action-btn">Set Learning Goals</button>
+                <button class="action-btn secondary-btn">View Detailed Report</button>
+                <button class="action-btn secondary-btn">Adjust Difficulty</button>
+            </div>
+        </div>
+
+        <!-- Improvement Annotations -->
+        <div class="improvement-annotation improvement-1">✅ Real-time achievements<br>Immediate celebration</div>
+        <div class="annotation-line line-1"></div>
+        
+        <div class="improvement-annotation improvement-2">✅ Actionable insights<br>Clear next steps</div>
+        <div class="annotation-line line-2"></div>
+        
+        <div class="improvement-annotation improvement-3">✅ Direct communication<br>Family connection</div>
+        <div class="annotation-line line-3"></div>
+    </div>
+</body>
+</html>

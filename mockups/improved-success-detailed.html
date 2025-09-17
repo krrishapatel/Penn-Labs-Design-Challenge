@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duolingo for Kids - Improved Success Screen (Detailed)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f7f7f7;
+            color: #333;
+        }
+
+        .phone-mockup {
+            width: 375px;
+            height: 812px;
+            background: #fff;
+            margin: 20px auto;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .status-bar {
+            height: 44px;
+            background: #000;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 14px;
+        }
+
+        .main-content {
+            padding: 40px 20px;
+            text-align: center;
+            background: #fff;
+            height: calc(100% - 44px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .celebration-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #58CC02;
+            margin-bottom: 20px;
+        }
+
+        .character-celebration {
+            font-size: 100px;
+            margin-bottom: 20px;
+            animation: dance 2s infinite;
+        }
+
+        @keyframes dance {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(-5deg) scale(1.1); }
+            50% { transform: rotate(0deg) scale(1); }
+            75% { transform: rotate(5deg) scale(1.1); }
+        }
+
+        .celebration-message {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .achievement-details {
+            background: linear-gradient(135deg, #58CC02, #4CAF50);
+            color: white;
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .achievement-details::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: translateX(-100%) translateY(-100%); }
+            50% { transform: translateX(100%) translateY(100%); }
+        }
+
+        .achievement-text {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .streak-info {
+            font-size: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .next-options {
+            margin-bottom: 30px;
+        }
+
+        .next-options-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .action-btn {
+            border: none;
+            padding: 15px 20px;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .do-again-btn {
+            background: #58CC02;
+            color: white;
+        }
+
+        .do-again-btn:hover {
+            background: #4CAF50;
+        }
+
+        .try-new-btn {
+            background: #1CB0F6;
+            color: white;
+        }
+
+        .try-new-btn:hover {
+            background: #0ea5e9;
+        }
+
+        .show-parent-btn {
+            background: #9c27b0;
+            color: white;
+        }
+
+        .show-parent-btn:hover {
+            background: #7b1fa2;
+        }
+
+        .take-break-btn {
+            background: #f0f0f0;
+            color: #666;
+        }
+
+        .take-break-btn:hover {
+            background: #e0e0e0;
+        }
+
+        .daily-surprise {
+            background: #fff3e0;
+            color: #e65100;
+            padding: 15px;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            border: 2px solid #ffb74d;
+        }
+
+        .improvement-annotation {
+            position: absolute;
+            background: #4CAF50;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 10;
+            max-width: 120px;
+            text-align: center;
+        }
+
+        .improvement-1 {
+            top: 200px;
+            right: 20px;
+        }
+
+        .improvement-2 {
+            top: 400px;
+            right: 20px;
+        }
+
+        .improvement-3 {
+            top: 600px;
+            right: 20px;
+        }
+
+        .annotation-line {
+            position: absolute;
+            width: 2px;
+            background: #4CAF50;
+            z-index: 5;
+        }
+
+        .line-1 {
+            top: 200px;
+            right: 140px;
+            height: 100px;
+        }
+
+        .line-2 {
+            top: 400px;
+            right: 140px;
+            height: 100px;
+        }
+
+        .line-3 {
+            top: 600px;
+            right: 140px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-mockup">
+        <div class="status-bar">
+            <span>9:41</span>
+            <span>📶 📶 📶 🔋</span>
+        </div>
+        
+        <div class="main-content">
+            <div class="celebration-title">🎉 Amazing Work, Emma!</div>
+            
+            <div class="character-celebration">🦉</div>
+            
+            <div class="celebration-message">Duo is doing a happy dance!</div>
+            
+            <div class="achievement-details">
+                <div class="achievement-text">You learned 5 new colors!</div>
+                <div class="streak-info">Your streak: 3 days 🔥</div>
+            </div>
+            
+            <div class="next-options">
+                <div class="next-options-title">What would you like to do next?</div>
+                
+                <div class="action-buttons">
+                    <button class="action-btn do-again-btn">Do It Again!</button>
+                    <button class="action-btn try-new-btn">Try Something New</button>
+                    <button class="action-btn show-parent-btn">Show Parent</button>
+                    <button class="action-btn take-break-btn">Take a Break</button>
+                </div>
+            </div>
+            
+            <div class="daily-surprise">
+                Tomorrow's surprise: New animal sounds! 🐶
+            </div>
+        </div>
+
+        <!-- Improvement Annotations -->
+        <div class="improvement-annotation improvement-1">✅ Varied celebration<br>Different animation<br>Maintains novelty</div>
+        <div class="annotation-line line-1"></div>
+        
+        <div class="improvement-annotation improvement-2">✅ Multiple options<br>Child choice<br>Personalized experience</div>
+        <div class="annotation-line line-2"></div>
+        
+        <div class="improvement-annotation improvement-3">✅ Daily surprise<br>Maintains curiosity<br>Builds anticipation</div>
+        <div class="annotation-line line-3"></div>
+    </div>
+</body>
+</html>

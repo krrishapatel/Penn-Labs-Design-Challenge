@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duolingo for Kids - Improved Learning Activity (Detailed)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f7f7f7;
+            color: #333;
+        }
+
+        .phone-mockup {
+            width: 375px;
+            height: 812px;
+            background: #fff;
+            margin: 20px auto;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .status-bar {
+            height: 44px;
+            background: #000;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 14px;
+        }
+
+        .header {
+            background: #58CC02;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .lesson-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .difficulty-indicator {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 14px;
+        }
+
+        .progress-section {
+            background: #f0f0f0;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .progress-text {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            width: 80%;
+            height: 100%;
+            background: #58CC02;
+            border-radius: 4px;
+        }
+
+        .main-content {
+            padding: 40px 20px;
+            text-align: center;
+            background: #fff;
+            height: calc(100% - 200px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .question {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .visual-question {
+            font-size: 80px;
+            margin-bottom: 40px;
+        }
+
+        .answer-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .answer-btn {
+            background: #f0f0f0;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .answer-btn:hover {
+            background: #e0e0e0;
+            transform: translateY(-2px);
+        }
+
+        .help-section {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .help-btn {
+            background: #1CB0F6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .help-btn:hover {
+            background: #0ea5e9;
+        }
+
+        .easy-mode-btn {
+            background: #ff9800;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .easy-mode-btn:hover {
+            background: #f57c00;
+        }
+
+        .encouragement {
+            background: #e8f5e8;
+            color: #2e7d32;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .submit-btn {
+            background: #58CC02;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: #4CAF50;
+            transform: translateY(-2px);
+        }
+
+        .skip-btn {
+            background: #f0f0f0;
+            color: #666;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .skip-btn:hover {
+            background: #e0e0e0;
+        }
+
+        .parent-btn {
+            background: #9c27b0;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .parent-btn:hover {
+            background: #7b1fa2;
+        }
+
+        .improvement-annotation {
+            position: absolute;
+            background: #4CAF50;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 10;
+            max-width: 120px;
+            text-align: center;
+        }
+
+        .improvement-1 {
+            top: 150px;
+            right: 20px;
+        }
+
+        .improvement-2 {
+            top: 350px;
+            right: 20px;
+        }
+
+        .improvement-3 {
+            top: 550px;
+            right: 20px;
+        }
+
+        .annotation-line {
+            position: absolute;
+            width: 2px;
+            background: #4CAF50;
+            z-index: 5;
+        }
+
+        .line-1 {
+            top: 150px;
+            right: 140px;
+            height: 100px;
+        }
+
+        .line-2 {
+            top: 350px;
+            right: 140px;
+            height: 100px;
+        }
+
+        .line-3 {
+            top: 550px;
+            right: 140px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-mockup">
+        <div class="status-bar">
+            <span>9:41</span>
+            <span>📶 📶 📶 🔋</span>
+        </div>
+        
+        <div class="header">
+            <button class="back-btn">←</button>
+            <div class="lesson-title">🎯 Learn Colors in Spanish</div>
+            <div class="difficulty-indicator">⭐⭐ Easy</div>
+        </div>
+        
+        <div class="progress-section">
+            <div class="progress-text">80% Complete</div>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="question">What color is this?</div>
+            <div class="visual-question">🍎</div>
+            
+            <div class="answer-options">
+                <button class="answer-btn">Red</button>
+                <button class="answer-btn">Blue</button>
+                <button class="answer-btn">Green</button>
+                <button class="answer-btn">Yellow</button>
+            </div>
+            
+            <div class="help-section">
+                <button class="help-btn">Need Help?</button>
+                <button class="help-btn">Hint</button>
+                <button class="easy-mode-btn">Easy Mode</button>
+            </div>
+            
+            <div class="encouragement">You're doing great! Keep going!</div>
+            
+            <div class="action-buttons">
+                <button class="submit-btn">Submit Answer</button>
+                <button class="skip-btn">Skip for Now</button>
+                <button class="parent-btn">Ask Parent</button>
+            </div>
+        </div>
+
+        <!-- Improvement Annotations -->
+        <div class="improvement-annotation improvement-1">✅ Difficulty indicator<br>Clear level shown<br>Builds confidence</div>
+        <div class="annotation-line line-1"></div>
+        
+        <div class="improvement-annotation improvement-2">✅ Help system<br>Support when needed<br>Prevents frustration</div>
+        <div class="annotation-line line-2"></div>
+        
+        <div class="improvement-annotation improvement-3">✅ Encouragement<br>Positive reinforcement<br>Maintains motivation</div>
+        <div class="annotation-line line-3"></div>
+    </div>
+</body>
+</html>
